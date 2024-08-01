@@ -4,11 +4,7 @@
     "declaration": true,
     "useDefineForClassFields": true,
     "module": "ESNext",
-    "lib": [
-      "ES2020",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -24,16 +20,14 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".", //paths 路径解析起点
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    }
+      "@/*": ["src/*"]
+    },
+
+    //允许使用js
+    "allowJs": true,
+    "noImplicitAny": false
   },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue"
-  ],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
   "references": [
     {
       "path": "./tsconfig.node.json"

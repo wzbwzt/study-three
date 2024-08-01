@@ -119,15 +119,7 @@ function base() {
   const domePhiEnd = Math.PI * 2;
   const domeThetaStart = 0;
   const domeThetaEnd = Math.PI * 0.5;
-  const domeGeometry = new THREE.SphereGeometry(
-    domeRadius,
-    domeWidthSubdivisions,
-    domeHeightSubdivisions,
-    domePhiStart,
-    domePhiEnd,
-    domeThetaStart,
-    domeThetaEnd
-  );
+  const domeGeometry = new THREE.SphereGeometry(domeRadius, domeWidthSubdivisions, domeHeightSubdivisions, domePhiStart, domePhiEnd, domeThetaStart, domeThetaEnd);
   const domeMesh = new THREE.Mesh(domeGeometry, bodyMaterial);
   domeMesh.castShadow = true;
   bodyMesh.add(domeMesh);
@@ -173,18 +165,7 @@ function base() {
   targetCameraPivot.add(targetCamera);
 
   // Create a sine-like wave
-  const curve = new THREE.SplineCurve([
-    new THREE.Vector2(-10, 0),
-    new THREE.Vector2(-5, 5),
-    new THREE.Vector2(0, 0),
-    new THREE.Vector2(5, -5),
-    new THREE.Vector2(10, 0),
-    new THREE.Vector2(5, 10),
-    new THREE.Vector2(-5, 10),
-    new THREE.Vector2(-10, -10),
-    new THREE.Vector2(-15, -8),
-    new THREE.Vector2(-10, 0),
-  ]);
+  const curve = new THREE.SplineCurve([new THREE.Vector2(-10, 0), new THREE.Vector2(-5, 5), new THREE.Vector2(0, 0), new THREE.Vector2(5, -5), new THREE.Vector2(10, 0), new THREE.Vector2(5, 10), new THREE.Vector2(-5, 10), new THREE.Vector2(-10, -10), new THREE.Vector2(-15, -8), new THREE.Vector2(-10, 0)]);
 
   const points = curve.getPoints(50);
   const geometry = new THREE.BufferGeometry().setFromPoints(points);

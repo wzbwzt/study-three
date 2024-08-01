@@ -15,6 +15,8 @@ import Fog from "../view/base/Fog.vue";
 import RenderTarget from "../view/base/RenderTarget.vue";
 import BufferGeometry from "../view/base/BufferGeometry.vue";
 import MuchObjsOptimize from "../view/base/MuchObjsOptimize.vue";
+import Test from "../view/base/Test.vue";
+import LoadGlb from "../view/base/LoadGlb.vue";
 
 const routes = [
   { path: "/", component: Home },
@@ -32,6 +34,8 @@ const routes = [
   { path: "/renderTarget", component: RenderTarget },
   { path: "/bufferGeometry", component: BufferGeometry },
   { path: "/muchObjsOptimize", component: MuchObjsOptimize },
+  { path: "/test", component: Test },
+  { path: "/loadglb", component: LoadGlb },
 ];
 
 const router = createRouter({
