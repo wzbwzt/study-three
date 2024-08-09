@@ -9,11 +9,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@enable3d/ammo-physics": "^0.25.4",
+    "@types/three": "^0.167.1",
+    "ammo.js": "^0.0.10",
     "three": "^0.160.0",
     "vue": "^3.3.11",
+    "vue-head": "^2.2.0",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
+    "@types/node": "^22.1.0",
     "@types/three": "^0.160.0",
     "@vitejs/plugin-vue": "^4.5.2",
     "typescript": "^5.2.2",

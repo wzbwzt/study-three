@@ -17,31 +17,43 @@ const base = () => {
 
   const scene = new THREE.Scene();
 
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.set(2, 5, 10);
-  //   camera.lookAt(0, 0, 0);
+  const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera.position.set(0, 20, 30);
+  camera.lookAt(0, 0, 0);
 
   const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+  renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth, window.innerHeight);
+
+  //背景光
+  // scene.add(ambientLight());
+
+  //聚光灯
+  const spotlight = spotLight();
+  scene.add(spotlight);
+
+  //mesh
+  const { plane, clinder } = meshs();
+  scene.add(plane, clinder);
+
   {
-    //背景光
-    scene.add(ambientLight());
-  }
-  {
-    //mesh
-    scene.add(meshs());
+    //投影
+    clinder.castShadow = true;
+    plane.receiveShadow = true;
+    spotlight.castShadow = true;
+    renderer.shadowMap.enabled = true;
   }
 
   {
     //划线
-    const line = drawLine();
-    scene.add(line);
+    // const line = drawLine();
+    // scene.add(line);
   }
 
   {
     //增加x,y,z轴
-    const axes = axesHelper();
-    scene.add(axes);
+    // const axes = axesHelper();
+    // scene.add(axes);
   }
 
   {
@@ -90,11 +102,34 @@ const ambientLight = () => {
   return light;
 };
 
+const spotLight = () => {
+  const color = 0xffffff;
+  const intensity = 3000;
+  const light = new THREE.SpotLight(color, intensity);
+  light.position.set(-10, 10, 0);
+  light.angle = Math.PI / 6;
+  light.penumbra = 0.3;
+  return light;
+};
+
 const meshs = () => {
-  const geometry = new THREE.BoxGeometry(1, 1, 1);
-  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-  const cube = new THREE.Mesh(geometry, material);
-  return cube;
+  // const geometry = new THREE.BoxGeometry(1, 1, 1);
+  // const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+  // const cube = new THREE.Mesh(geometry, material);
+  // return cube;
+  // 平面
+  const plane_geo = new THREE.PlaneGeometry(100, 100);
+  const plane_mater = new THREE.MeshPhongMaterial({ color: 0x808080 });
+  const plane = new THREE.Mesh(plane_geo, plane_mater);
+  plane.rotation.x = -Math.PI / 2;
+  plane.position.set(0, -2, 0);
+
+  //圆柱体
+  const clinder_geo = new THREE.CylinderGeometry();
+  const clinder_mater = new THREE.MeshPhongMaterial({ color: 0x909 });
+  const clinder = new THREE.Mesh(clinder_geo, clinder_mater);
+  clinder.position.set(0, 2, 0);
+  return { plane, clinder };
 };
 </script>
 <style scoped></style>

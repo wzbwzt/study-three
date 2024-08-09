@@ -1,13 +1,16 @@
 <template>
   <div id="container"></div>
+  <!-- <button id="screenshot" type="button">Save...</button> -->
 </template>
 <script setup>
 import * as THREE from "three";
-import Stats from "three/examples/jsm/libs/stats.module.js";
-import { GUI } from "three/examples/jsm/libs/lil-gui.module.min.js";
+import Stats from "three/addons/libs/stats.module.js";
+import { GUI } from "three/addons/libs/lil-gui.module.min.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { onMounted } from "vue";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+
+let container;
 
 let scene, renderer, camera, stats;
 let model, skeleton, mixer, clock;
@@ -26,7 +29,7 @@ onMounted(() => {
 });
 
 function init() {
-  const container = document.getElementById("container");
+  container = document.querySelector("#container");
 
   camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 100);
   camera.position.set(1, 2, -3);
@@ -34,7 +37,9 @@ function init() {
 
   {
     //控制器
-    new OrbitControls(camera, container);
+    // const controls = new OrbitControls(camera, container);
+    // controls.target.set(0, 1, 0);
+    // controls.update();
   }
 
   clock = new THREE.Clock();
@@ -61,6 +66,14 @@ function init() {
   // scene.add( new THREE.CameraHelper( dirLight.shadow.camera ) );
 
   // ground
+
+  {
+    //axes
+    const axes = new THREE.AxesHelper(10);
+    axes.material.depthTest = false;
+    axes.renderOrder = 1;
+    scene.add(axes);
+  }
 
   const mesh = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), new THREE.MeshPhongMaterial({ color: 0xcbcbcb, depthWrite: false }));
   mesh.rotation.x = -Math.PI / 2;
@@ -97,7 +110,6 @@ function init() {
     idleAction = mixer.clipAction(animations[0]);
     walkAction = mixer.clipAction(animations[3]);
     runAction = mixer.clipAction(animations[1]);
-    // tposeAction = mixer.clipAction(animations[2]);
 
     actions = [idleAction, walkAction, runAction];
 
@@ -392,5 +404,24 @@ function animate() {
 
   stats.update();
 }
+
+// const elem = document.querySelector("#screenshot");
+// elem.addEventListener("click", () => {
+//   container.dom.toBlob((blob) => {
+//     saveBlob(blob, `screencapture-${canvas.width}x${canvas.height}.png`);
+//   });
+// });
+
+// const saveBlob = (function () {
+//   const a = document.createElement("a");
+//   document.body.appendChild(a);
+//   a.style.display = "none";
+//   return function saveData(blob, fileName) {
+//     const url = window.URL.createObjectURL(blob);
+//     a.href = url;
+//     a.download = fileName;
+//     a.click();
+//   };
+// })();
 </script>
 <style scoped lang="scss"></style>

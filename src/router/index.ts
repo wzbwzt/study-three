@@ -15,8 +15,12 @@ import Fog from "../view/base/Fog.vue";
 import RenderTarget from "../view/base/RenderTarget.vue";
 import BufferGeometry from "../view/base/BufferGeometry.vue";
 import MuchObjsOptimize from "../view/base/MuchObjsOptimize.vue";
-import Test from "../view/base/Test.vue";
-import LoadGlb from "../view/base/LoadGlb.vue";
+import SpotlightShadow from "../view/demo/SpotlightShadow.vue";
+import LoadGlb from "../view/demo/LoadGlb.vue";
+import HelperGUI from "../view/demo/HelperGui.vue";
+import InstancemeshRaycast from "../view/demo/InstancemeshRaycast.vue";
+import Physic from "../view/demo/Physic.vue";
+import ShadowmapView from "../view/demo/ShadowmapView.vue";
 
 const routes = [
   { path: "/", component: Home },
@@ -34,13 +38,34 @@ const routes = [
   { path: "/renderTarget", component: RenderTarget },
   { path: "/bufferGeometry", component: BufferGeometry },
   { path: "/muchObjsOptimize", component: MuchObjsOptimize },
-  { path: "/test", component: Test },
-  { path: "/loadglb", component: LoadGlb },
+
+  {
+    path: "/spotlight-shadow",
+    component: SpotlightShadow,
+    name: "聚光灯&&投影",
+  },
+  { path: "/loadglb", component: LoadGlb, name: "加载glb示例" },
+  { path: "/helper-gui", component: HelperGUI, name: "helper and gui 调试器" },
+  {
+    path: "/instanceMesh-Raycast",
+    component: InstancemeshRaycast,
+    name: "InstancedMesh:高性能的渲染大量相同的mesh;raycast:光线投影，用于鼠标拾取",
+  },
+  {
+    path: "/physic",
+    component: Physic,
+    name: "物理引擎(ammo)使用示例",
+  },
+  {
+    path: "/shadowmap-view",
+    component: ShadowmapView,
+    name: "shadowmap view 使用实例",
+  },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes, // `routes: routes` 的缩写
+  routes: routes as any, // `routes: routes` 的缩写
 });
 
 export default router;
